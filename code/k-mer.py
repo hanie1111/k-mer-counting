@@ -5,9 +5,18 @@
 import sys
 import math
 import os
+import collections
 
-def kmer(sequence):
-    print(sequence)
+kmer_dict = collections.defaultdict(int)
+
+def kmer(sequence, k_size):
+    start_index = 0
+    end_index = len(sequence) - k_size +1
+    while start_index < end_index:
+        key = sequence[start_index:start_index+k_size]
+        kmer_dict[key] += 1
+        start_index += 1
+
 
 def read_fasta(inputFile , k_size):
     fasta_file = open(inputFile, "r")
@@ -18,13 +27,15 @@ def read_fasta(inputFile , k_size):
             # call the kmer if sequence is not empty
             if sequence is not "":
                 print('Analyzing chunk {} of data'.format(counter))
-                kmer(sequence)
+                kmer(sequence, k_size )
                 sequence = sequence[-k_size+1:]
                 counter += 1
         else:
             if line[-1] is '\n':
                 line = line[:-1]
             sequence = sequence + line
+    print("Kmer counting is finished!")
+    fasta_file.close()
 
 
 ## Main ##
@@ -36,7 +47,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 print("Enter K value:")
 k_size = int(input())
 
-inputFile: str = "../data/SRR1748776.FASTA"
+inputFile: str = "../data/sampleData.FASTA"
 print("Enter input file or skip [S] to use the default:")
 response: str = input()
 if response != "S":
@@ -46,4 +57,5 @@ if response != "S":
 
 # READ THE INPUT FILE
 read_fasta(inputFile, k_size)
-#read_fasta_sequence(inputFile)
+## analyzing the dictionary
+
