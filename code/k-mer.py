@@ -34,6 +34,8 @@ def read_fasta(inputFile , k_size):
             if line[-1] is '\n':
                 line = line[:-1]
             sequence = sequence + line
+    print('Analyzing chunk {} of data'.format(counter))
+    kmer(sequence, k_size)
     print("Kmer counting is finished!")
     fasta_file.close()
 
@@ -47,7 +49,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 print("Enter K value:")
 k_size = int(input())
 
-inputFile: str = "../data/sampleData.FASTA"
+inputFile: str = "../data/SRR1748776.FASTA"
 print("Enter input file or skip [S] to use the default:")
 response: str = input()
 if response != "S":
@@ -57,5 +59,10 @@ if response != "S":
 
 # READ THE INPUT FILE
 read_fasta(inputFile, k_size)
-## analyzing the dictionary
 
+## analyzing the dictionary
+print("Data analysis:")
+#max_val = [keys for keys,values in kmer_dict.items() if values == max(kmer_dict.values())]
+max_kmer = max(kmer_dict.items())
+print("{} has the maximum frequency".format(max_kmer[0]))
+print("maximum frequency is {}".format(max_kmer[1]))
