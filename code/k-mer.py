@@ -4,6 +4,7 @@
 
 import sys
 import math
+import os
 
 def kmer(sequence):
     print(sequence)
@@ -27,11 +28,15 @@ def read_fasta(inputFile , k_size):
 
 
 ## Main ##
+# SET WORKING DIRECTORY
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 # GET THE FILE NAME FROM USER
+
 print("Enter K value:")
 k_size = int(input())
 
-inputFile: str = "/home/hanie/Desktop/IDbyDNACodeChallenge/SRR1748776.FASTA"
+inputFile: str = "../data/SRR1748776.FASTA"
 print("Enter input file or skip [S] to use the default:")
 response: str = input()
 if response != "S":
