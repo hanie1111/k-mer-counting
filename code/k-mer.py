@@ -83,10 +83,11 @@ counter = 0
 for item in kmer_dict.values():
     counter += item
 
-max_kmer = max(kmer_dict.items())
+#max_kmer = max(kmer_dict.items())
+key_max = max(kmer_dict.items(), key=lambda a: a[1])
 print("There are {} k-mers in the file".format(counter))
-print("{} has the maximum frequency".format(max_kmer[0]))
-print("maximum frequency is {}".format(max_kmer[1]))
+print("{} has the maximum frequency".format(key_max[0]))
+print("maximum frequency is {}".format(key_max[1]))
 
 #END TIME
 print(time.strftime('%X %x %S %Z'))
